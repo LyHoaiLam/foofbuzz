@@ -2,7 +2,7 @@
 import { StatGroup, Stat, StatLabel, StatNumber, StatHelpText, StatArrow  } from '@chakra-ui/react'
 
 
-export default function Example() {
+export default function Statistical2() {
 
     return (
 
