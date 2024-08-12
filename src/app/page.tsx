@@ -1,13 +1,10 @@
-import Image from "next/image";
 import { Container } from '@chakra-ui/react'
 import Header from "./Layouts/Header";
 import Footer from "./Layouts/Footer";
 import ListProducts from "@/Components/ListProducts";
 import ListText from "@/Components/ListText";
 import AboutUs from "@/Components/Questions";
-import Example from "@/Components/ListText/index2";
-
-
+import img from '../assets/GrabFood-EX-Desktop-HeaderImageV1.jpg'
 
 
 export default function Home() {
@@ -16,6 +13,10 @@ export default function Home() {
       <main className="">
         <div>
           <Header />
+        </div>
+
+        <div>
+          <img src={img} />
         </div>
         
         <div>
@@ -34,8 +35,6 @@ export default function Home() {
         <div className="mt-20">
           <Footer />
         </div>
-
-
       </main>
     </Container>
   );

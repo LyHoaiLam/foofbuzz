@@ -1,11 +1,11 @@
 import { Accordion, AccordionItem, AccordionButton, Box, AccordionIcon,
     AccordionPanel,
     OrderedList,
-    ListItem
-
- } from "@chakra-ui/react";
+    ListItem } from "@chakra-ui/react";
 
 export default function AboutUs() {
+
+
     return (
 
         <div className="w-full pr-96 pl-96">
@@ -16,7 +16,7 @@ export default function AboutUs() {
                         <Box as='span' flex='1' textAlign='left' className="text-3xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
                         GrabBuzz là gì?
                         </Box>
-                        <AccordionIcon className='border-gray-950 rounded-full border-solid border-2 text-3xl' />
+                        <AccordionIcon color="green" className='text-4xl' />
                     </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
@@ -30,22 +30,22 @@ export default function AboutUs() {
                         <Box as='span' flex='1' textAlign='left' className="text-3xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
                             Làm cách nào để đặt đồ ăn ở Việt Nam?
                         </Box>
-                        <AccordionIcon className='border-gray-950 rounded-full border-solid border-2 text-3xl' />
+                        <AccordionIcon color="green" className='text-4xl' />
                     </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
                         <p className="text-lg font-bold">Sau đây là cách đơn giản nhất để đặt đồ ăn qua GrabFood khi bạn ở Việt Nam: </p><br></br>
 
-                        <p>
-                            <span className="text-lg font-bold">Tìm kiếm nhà hàng hoặc món ăn yêu thích</span> - Nhập địa chỉ của bạn vào trang chủ. Xem các Nhà hàng và điểm ăn uống gần chỗ bạn trong danh sách của GrabFood. Chọn nhà hàng yêu thích, duyệt hết thực đơn và chọn món ăn bạn muốn đặt.</p>
+                        <p className="my-2 bg-gradient-to-r from-red-600 via-yellow-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                            <span className="text-lg font-bold text-black">Tìm kiếm nhà hàng hoặc món ăn yêu thích</span> - Nhập địa chỉ của bạn vào trang chủ. Xem các Nhà hàng và điểm ăn uống gần chỗ bạn trong danh sách của GrabFood. Chọn nhà hàng yêu thích, duyệt hết thực đơn và chọn món ăn bạn muốn đặt.</p>
                         <br></br>
 
-                       <p>
-                            <span className="text-lg font-bold">Kiểm tra & Thanh toán</span> - Sau khi chắc chắn rằng bạn đã đặt đầy đủ các món theo nhu cầu, hãy nhấp vào tab “ORDER NOW” (ĐẶT MÓN NGAY) và nhập địa chỉ giao đồ ăn cuối cùng. Chọn phương thức thanh toán phù hợp nhất với bạn và thanh toán.</p>
+                       <p className="my-2 bg-gradient-to-r from-red-600 via-yellow-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                            <span className="text-lg font-bold text-black">Kiểm tra & Thanh toán</span> - Sau khi chắc chắn rằng bạn đã đặt đầy đủ các món theo nhu cầu, hãy nhấp vào tab “ORDER NOW” (ĐẶT MÓN NGAY) và nhập địa chỉ giao đồ ăn cuối cùng. Chọn phương thức thanh toán phù hợp nhất với bạn và thanh toán.</p>
                        <br></br>
 
-                       <p>
-                            <span className="text-lg font-bold">Giao hàng</span> - GrabFood đã thiết kế một hành trình phục vụ khách hàng liền mạch để bạn có thể thưởng thức món ăn một cách trọn vẹn. Chúng tôi sẽ gửi cho bạn email và tin nhắn SMS tức thời xác nhận đơn đặt hàng của bạn và thời gian giao hàng dự kiến. Sau đó chúng tôi sẽ giao ngay đồ ăn cho bạn.
+                       <p className="my-2 bg-gradient-to-r from-red-600 via-yellow-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                            <span className="text-lg font-bold text-black">Giao hàng</span> - GrabFood đã thiết kế một hành trình phục vụ khách hàng liền mạch để bạn có thể thưởng thức món ăn một cách trọn vẹn. Chúng tôi sẽ gửi cho bạn email và tin nhắn SMS tức thời xác nhận đơn đặt hàng của bạn và thời gian giao hàng dự kiến. Sau đó chúng tôi sẽ giao ngay đồ ăn cho bạn.
                         </p>
                       
                         </AccordionPanel>
@@ -58,7 +58,7 @@ export default function AboutUs() {
                         <Box as='span' flex='1' textAlign='left' className="text-3xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
                             Vì sao bạn nên chọn chúng tôi?
                         </Box>
-                        <AccordionIcon className='border-gray-950 rounded-full border-solid border-2 text-3xl' />
+                        <AccordionIcon color="green" className='text-4xl' />
                     </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>

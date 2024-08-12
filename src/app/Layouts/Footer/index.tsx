@@ -11,7 +11,7 @@ const Footer = () => {
       fontSize="0.875rem"
     >
       <Box
-        maxW="64rem"
+        maxW="80rem"
         marginX="auto"
         pb="2rem"
         mb="1.5rem"
