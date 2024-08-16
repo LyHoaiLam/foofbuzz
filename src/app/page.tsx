@@ -4,7 +4,6 @@ import Footer from "./Layouts/Footer";
 import ListProducts from "@/Components/ListProducts";
 import ListText from "@/Components/ListText";
 import AboutUs from "@/Components/Questions";
-import img from '../assets/GrabFood-EX-Desktop-HeaderImageV1.jpg'
 
 
 export default function Home() {
@@ -14,14 +13,14 @@ export default function Home() {
         <div>
           <Header />
         </div>
-
-        <div>
-          <img src={img} />
-        </div>
-        
+      
         <div>
           <ListProducts />
         </div>
+
+        {/* <div>
+            <Image src={img} />
+        </div> */}
 
 
         <div className="mt-20">
@@ -32,9 +31,13 @@ export default function Home() {
           <AboutUs />
         </div>
 
+      
         <div className="mt-20">
           <Footer />
         </div>
+
+
+
       </main>
     </Container>
   );

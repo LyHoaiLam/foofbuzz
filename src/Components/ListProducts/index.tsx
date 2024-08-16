@@ -1,5 +1,12 @@
-import { Wrap, WrapItem, Center, SimpleGrid} from "@chakra-ui/react"
-import Product from "../Product"
+"use client";
+
+import { Wrap, WrapItem, Center, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import Product from "../Product";
+import { useState, useEffect } from "react";
+import Card from "../Card";
+import { AddIcon } from "@chakra-ui/icons";
+
+
 
 const listproduct = [
     {
@@ -128,22 +135,52 @@ const listproduct = [
 
 ]
 
-  function ListProducts() {
+const ListProducts: React.FC = () => {
+    const [selectedItem, setSelectedItem] = useState<number | null>(null);
+    const [showCard, setShowCard] = useState<boolean>(false);
+    const [storedData, setStoredData] = useState<any[]>([]);
 
-   return (
-        <Wrap spacing='30px' justify='center'>
-            <SimpleGrid className='grid xl:grid-cols-4 sm:grid-cols-2' spacing='20px'>
-            {listproduct.map((product, index) => (
-                <WrapItem key={index} marginTop="0px">
-                    <Center  h="auto" bg="red.200">
-                        <Product product={product}/>
-                    </Center>
-                </WrapItem>
-            ))}
-            </SimpleGrid>
-        </Wrap>
-    )
-}
+    useEffect(() => {
+        const savedData = JSON.parse(localStorage.getItem('productData') || '[]');
+        if (savedData.length > 0) {
+            setStoredData(savedData);
+        } else {
+            localStorage.setItem('productData', JSON.stringify(listproduct));
+            setStoredData(listproduct);
+        }
+    }, []);
+
+    const handlePayment = (index: number) => {
+        setSelectedItem(index);
+        setShowCard(true);
+    };
+
+    return (
+        <>
+            <Wrap spacing='30px' justify='center'>
+                <SimpleGrid className='grid xl:grid-cols-4 sm:grid-cols-2' spacing='20px'>
+                    {storedData.map((item, index) => (
+                        <WrapItem key={index} marginTop="0px">
+                            <Center h="auto" bg="red.200">
+                                <Product product={item} handlePayment={() => handlePayment(index)} />
+                            </Center>
+                        </WrapItem>
+                    ))}
+                </SimpleGrid>
+            </Wrap>
+
+            <div className="flex justify-center">
+                {selectedItem !== null && showCard && (
+                    <Card
+                        img={storedData[selectedItem].imageUrl}
+                        title={storedData[selectedItem].title}
+                        description={storedData[selectedItem].description}
+                        price={storedData[selectedItem].formattedPrice}
+                    />
+                )}
+            </div>
+        </>
+    );
+};
 
 export default ListProducts;
-

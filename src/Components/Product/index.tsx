@@ -1,6 +1,7 @@
-import { Badge, Box, Image } from "@chakra-ui/react";
+import { Badge, Box, Image, Button, Wrap, WrapItem } from "@chakra-ui/react";
+import '../../app/globals.css'
 
-function Product({ product }) {
+function Product({ product, handlePayment }) {
     return (
         <Box maxW={{ base: '100%', md: 'sm' }} borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Image className="w-full md:w-72 h-48 rounded-md" src={product.imageUrl} alt={product.imageAlt} />
@@ -41,17 +42,16 @@ function Product({ product }) {
                 </Box>
 
                 <Box display='flex' mt='2' alignItems='center'>
-                    {/* {Array(5)
-                        .fill('')
-                        .map((_, i) => (
-                            <StarIcon
-                                key={i}
-                                color={i < product.rating ? 'teal.500' : 'gray.300'}
-                            />
-                        ))} */}
                     <Box as='span' ml='2' color='gray.600' fontSize='sm'>
                         {product.reviewCount} reviews
                     </Box>
+
+                    <Button
+                        onClick={handlePayment}
+                        className="text-white bg-green-500 bg-slate-500 rounded-lg ml-5 p-2">
+                        Mua Ngay
+                    </Button>
+
                 </Box>
             </Box>
         </Box>

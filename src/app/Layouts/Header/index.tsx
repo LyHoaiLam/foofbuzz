@@ -1,9 +1,12 @@
 
 // Ensure this is a client component
 "use client";
-
 import MenuHeader from "@/Components/MenuHeader/MenuHeader";
 import { Search2Icon } from "@chakra-ui/icons";
+import { Image } from "@chakra-ui/react";
+import { Button } from '@chakra-ui/react'
+import Link from "next/link";
+
 
 export default function Header() {
   return (
@@ -13,7 +16,9 @@ export default function Header() {
           <li className="mx-4">
             <MenuHeader />
           </li>
-          <li className="mx-4">GrabBuzz</li>
+          <li className="mx-4 bg-gradient-to-r from-red-600 via-blue-500 to-green-400 inline-block text-transparent bg-clip-text">
+            GrabBuzz
+          </li>
         </ul>
       </div>
 
@@ -24,6 +29,13 @@ export default function Header() {
           <li className="mx-4">Tiếng Việt</li>
           <li className="mx-4">
             <Search2Icon className="" />
+          </li>
+          <li>
+            <Link href="/login/login">
+              <Button className="bg-yellow-50 border-2 rounded-md border-solid divide-neutral-950 text-lg w-20">
+                Login
+              </Button>
+            </Link>
           </li>
         </ul>
       </div>
