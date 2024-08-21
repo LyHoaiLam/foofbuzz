@@ -4,7 +4,7 @@ import '../../app/globals.css'
 function Product({ product, handlePayment }) {
     return (
         <Box maxW={{ base: '100%', md: 'sm' }} borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Image className="w-full md:w-72 h-48 rounded-md" src={product.imageUrl} alt={product.imageAlt} />
+            <Image className="w-full md:w-72 h-48 rounded-md" src={product.foodImage} alt={product.imageAlt} />
 
             <Box p='6'>
                 <Box display='flex' alignItems='baseline'>
@@ -31,11 +31,11 @@ function Product({ product, handlePayment }) {
                     lineHeight='tight'
                     noOfLines={1}
                 >
-                    {product.title}
+                    {product.foodName}
                 </Box>
 
                 <Box>
-                    {product.formattedPrice}
+                    {product.price}
                     <Box as='span' color='gray.600' fontSize='sm'>
                         / VNĐ
                     </Box>

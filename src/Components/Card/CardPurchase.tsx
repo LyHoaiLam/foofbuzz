@@ -16,7 +16,7 @@ interface BasketItem {
     selectedToppings: { name: string }[];
 }
 
-function CardPurchase({ clickCount, Img }: CardPurchaseProps) {
+function CardPurchase({ clickCount, Img, Name }: CardPurchaseProps) {
     const [basketData, setBasketData] = useState<BasketItem[]>([]);
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -58,7 +58,8 @@ function CardPurchase({ clickCount, Img }: CardPurchaseProps) {
             </div>
 
             <div style={{ backgroundColor: "white" }} className='tt-dh'>
-                <p style={{ fontWeight: "700", marginLeft: "5%" }}>Tóm tắt đơn hàng</p>
+                <p>Tóm tắt đơn hàng</p>
+                <p className='font-semibold'>Tên món: <span className='font-normal'>{Name}</span></p>
 
                 <div className='item-00' style={{ display: "flex", marginLeft: "5%" }}>
                     <div className='tt-dh-15' style={{ display: "flex" }}>
@@ -76,9 +77,7 @@ function CardPurchase({ clickCount, Img }: CardPurchaseProps) {
                                                 <p className='mrg06'>{item.totalPrice}</p>
                                             </div>
                                         </div>
-                                        {item.selectedToppings.map((topping, index) => (
-                                            <p key={index} className='mrg0'>{topping.name}</p>
-                                        ))}
+
                                     </div>
                                 </div>
                             ))}

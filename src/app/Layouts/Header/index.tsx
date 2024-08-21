@@ -1,14 +1,27 @@
-
-// Ensure this is a client component
 "use client";
 import MenuHeader from "@/Components/MenuHeader/MenuHeader";
 import { Search2Icon } from "@chakra-ui/icons";
-import { Image } from "@chakra-ui/react";
-import { Button } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react';
 import Link from "next/link";
-
+import { useEffect, useState } from "react";
 
 export default function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Kiểm tra xem có token trong localStorage không
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // Xóa token khỏi localStorage và cập nhật trạng thái
+    localStorage.removeItem("access_token");
+    setIsLoggedIn(false);
+  };
+
   return (
     <div className="bg-green-600 flex justify-around h-10 items-center">
       <div>
@@ -31,16 +44,23 @@ export default function Header() {
             <Search2Icon className="" />
           </li>
           <li>
-            <Link href="/login/login">
-              <Button className="bg-yellow-50 border-2 rounded-md border-solid divide-neutral-950 text-lg w-20">
-                Login
+            {isLoggedIn ? (
+              <Button
+                className="bg-yellow-50 border-2 rounded-md border-solid divide-neutral-950 text-lg w-20"
+                onClick={handleLogout}
+              >
+                Logout
               </Button>
-            </Link>
+            ) : (
+              <Link href="/login/login">
+                <Button className="bg-yellow-50 border-2 rounded-md border-solid divide-neutral-950 text-lg w-20">
+                  Login
+                </Button>
+              </Link>
+            )}
           </li>
         </ul>
       </div>
     </div>
   );
 }
-
-

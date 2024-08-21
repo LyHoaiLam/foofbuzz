@@ -1,69 +1,62 @@
 "use client";
-import { useState, useEffect } from "react";
-import CardPurchase from "./CardPurchase"; // Ensure this path is correct
-import { SmallCloseIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import CardPurchase from "./CardPurchase";
+import { SmallCloseIcon, MinusIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import "./style.css";
-
-
-interface Topping {
-    name: string;
-    price: number;
-    check: boolean;
-}
 
 interface CardProps {
     img: string;
     title: string;
     description: string;
-    price: number;
+    price: number;  // Ensure this is always a number
 }
-
-const toppingData: Topping[] = [
-    { name: "Thêm nước", price: 20000, check: false },
-    { name: "Lấy dụng cụ ăn uống", price: 20000, check: false },
-    { name: "Giao nhanh", price: 20000, check: false },
-];
 
 const Card: React.FC<CardProps> = ({ img, title, description, price }) => {
     const [showCard, setShowCard] = useState(true);
-    const [toppings, setToppings] = useState<Topping[]>(toppingData);
     const [totalPrice, setTotalPrice] = useState<number>(price);
     const [clickCount, setClickCount] = useState<number>(0);
+    const [amount, setAmount] = useState<number>(0);  // Start with 0
+
+    console.log("Initial Price:", price);
+    console.log("Initial Amount:", amount);
 
     const handleClose = () => {
         setShowCard(false);
     };
 
-    const handleCheckboxChange = (index: number) => {
-        const updatedToppings = [...toppings];
-        updatedToppings[index].check = !updatedToppings[index].check;
-        setToppings(updatedToppings);
-    };
+    const handleAmountChange = (change: number) => {
+        const newAmount = amount + change;
+    
+        if (newAmount >= 0) {
+            setAmount(newAmount);
+    
+            // Ensure price is correctly parsed and multiplied
+            const parsedPrice = typeof price === 'string' ? parseFloat(price.replace(/,/g, '')) : price;
+            const newTotalPrice = newAmount * totalPrice;
 
-    useEffect(() => {
-        const selectedToppings = toppings.filter(topping => topping.check);
-        const toppingPrice = selectedToppings.reduce((acc, curr) => acc + curr.price, 0);
-        setTotalPrice(price + toppingPrice);
-    }, [toppings, price]);
+            console.log("newTotalPrice", newTotalPrice)
+    
+            console.log("Price Used for Calculation:", parsedPrice);
+            console.log("New Total Price Calculation:", newAmount, "*", parsedPrice, "=", newTotalPrice);
+    
+            setTotalPrice(isNaN(newTotalPrice) ? 0 : newTotalPrice);
+        }
+    };
+    
 
     const handleUpdateBasket = () => {
-        const selectedToppings = toppings.filter(topping => topping.check);
-        const toppingPrice = selectedToppings.reduce((acc, curr) => acc + curr.price, 0);
-        const totalPriceWithToppings = price + toppingPrice;
-
         const basketItem = {
             img,
             title,
-            totalPrice: totalPriceWithToppings,
-            selectedToppings
+            totalPrice,
         };
 
         const existingBasketData = JSON.parse(localStorage.getItem('basketData') || '[]');
         const updatedBasketData = [...existingBasketData, basketItem];
         localStorage.setItem('basketData', JSON.stringify(updatedBasketData));
 
-        setClickCount(clickCount + totalPriceWithToppings);
-        console.log("Total Clicks:", clickCount + totalPriceWithToppings);
+        setClickCount(clickCount + totalPrice);
+        console.log("Total Clicks:", clickCount + totalPrice);
     };
 
     return (
@@ -71,45 +64,33 @@ const Card: React.FC<CardProps> = ({ img, title, description, price }) => {
             {showCard && (
                 <div style={{ display: "flex" }}>
                     <div className='card-01'>
-                        <SmallCloseIcon onClick={handleClose}  />
+                        <SmallCloseIcon className="text-2xl" onClick={handleClose} />
                         <div className='card-01-item01'>
                             <img className='img-card w-80' src={img} alt={title} />
                             <div className='card-01-item01-text'>
                                 <p style={{ fontWeight: "700", textAlign: "left" }}>{title}</p>
                                 <p className='card-01-item01-desc'>{description}</p>
                             </div>
-                            <p className='card-01-item01-price'>{price}</p>
+                            <p className='card-01-item01-price'>{price} VNĐ</p>
                         </div>
                         <div className='card-01-item02'>
                             <div className='card-01-item02-div01'>
                                 <h4>Đồ đi kèm</h4>
                             </div>
-                            {toppings.map((topping, index) => (
-                                <div className='card-01-item02-div02' key={index}>
-                                    <input
-                                        className='card-01-item02-div02-check'
-                                        type='checkbox'
-                                        checked={topping.check}
-                                        onChange={() => handleCheckboxChange(index)}
-                                    />
-                                    <p className='card-01-item02-size'>{topping.name}</p>
-                                    <p style={{ marginLeft: "54%" }}>{topping.price}</p>
-                                </div>
-                            ))}
                         </div>
-                     
+
                         <div className='card-item02-04'>
-                            <button className='button-Card01'>-</button>
-                            <h3 className='card-num'>1</h3>
-                            <button className='button-Card02'>+</button>
-                            <button onClick={handleUpdateBasket} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                Update Basket - {totalPrice}
-                            </button>
-                            
+                            <MinusIcon className="mt-8 text-2xl" onClick={() => handleAmountChange(-1)} />
+                            <h3 className='card-num mt-8 text-2xl'>Số lượng: {amount}</h3>
+                            <PlusSquareIcon className="mt-8 text-2xl" onClick={() => handleAmountChange(1)} />
                         </div>
+
+                        <button onClick={handleUpdateBasket} className="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            Tổng tiền - {totalPrice} VNĐ
+                        </button>
                     </div>
                     <div className='card-02'>
-                        <CardPurchase clickCount={clickCount} Img={img} />
+                        <CardPurchase clickCount={clickCount} Img={img} Name={title} />
                     </div>
                 </div>
             )}
